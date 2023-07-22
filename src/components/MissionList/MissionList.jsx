@@ -13,23 +13,20 @@ const MissionList = () => {
     const { filteredMissions, handleSortChange } = useMissionListSorted(missions, sortByYear);
     const [loading, setLoading] = useState(true);
 
-    // useEffect(() => {
-    //     dispatch(fetchMissions());
-    // }, [dispatch]);
-
     useEffect(() => {
         const fetchMissionsData = async () => {
             try {
                 await dispatch(fetchMissions());
                 setLoading(false);
             } catch (error) {
-                console.error('Failed to fetch missions:', error);
+                console.error('Произошла ошибка при загрузке:', error.message);
                 setLoading(false);
             }
         };
 
         fetchMissionsData();
     }, [dispatch]);
+
 
     return (
         <div className="mission-list">
@@ -59,5 +56,3 @@ const MissionList = () => {
 };
 
 export default MissionList;
-
-
